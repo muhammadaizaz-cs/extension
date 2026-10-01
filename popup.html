@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickQR – QR Code Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="popup-container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-wrap">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" fill="white"/>
+            <rect x="14" y="3" width="7" height="7" rx="1.5" fill="white"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.5" fill="white"/>
+            <rect x="5" y="5" width="3" height="3" rx="0.5" fill="#7C3AED"/>
+            <rect x="16" y="5" width="3" height="3" rx="0.5" fill="#7C3AED"/>
+            <rect x="5" y="16" width="3" height="3" rx="0.5" fill="#7C3AED"/>
+            <rect x="14" y="14" width="3" height="3" rx="0.5" fill="white"/>
+            <rect x="18" y="14" width="3" height="3" rx="0.5" fill="white"/>
+            <rect x="14" y="18" width="3" height="3" rx="0.5" fill="white"/>
+            <rect x="18" y="18" width="3" height="3" rx="0.5" fill="white"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1 class="app-title">QuickQR</h1>
+          <p class="app-subtitle">Generate QR codes instantly</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Input Section -->
+    <section class="input-section">
+      <label for="qr-input" class="input-label">Enter text or URL</label>
+      <div class="input-wrapper">
+        <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+        <input
+          type="text"
+          id="qr-input"
+          class="qr-input"
+          placeholder="https://example.com, email, phone, Wi-Fi…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="input-clear-btn" id="input-clear-btn" title="Clear input" aria-label="Clear input">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Error message -->
+      <div class="error-msg" id="error-msg" role="alert" aria-live="polite">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span id="error-text">Please enter some text or a URL.</span>
+      </div>
+    </section>
+
+    <!-- Action Buttons Row -->
+    <div class="action-row">
+      <button class="btn btn-primary" id="generate-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Generate QR
+      </button>
+      <button class="btn btn-ghost" id="clear-btn" title="Clear everything">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+        </svg>
+        Clear
+      </button>
+    </div>
+
+    <!-- QR Preview Section -->
+    <section class="qr-section" id="qr-section">
+      <div class="qr-card" id="qr-card">
+        <!-- Placeholder (empty state) -->
+        <div class="qr-placeholder" id="qr-placeholder">
+          <div class="placeholder-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#C4B5FD" stroke-width="1.5" fill="none"/>
+              <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#C4B5FD" stroke-width="1.5" fill="none"/>
+              <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#C4B5FD" stroke-width="1.5" fill="none"/>
+              <rect x="5.5" y="5.5" width="2" height="2" rx="0.3" fill="#C4B5FD"/>
+              <rect x="16.5" y="5.5" width="2" height="2" rx="0.3" fill="#C4B5FD"/>
+              <rect x="5.5" y="16.5" width="2" height="2" rx="0.3" fill="#C4B5FD"/>
+              <rect x="14" y="14" width="2.5" height="2.5" rx="0.3" fill="#C4B5FD"/>
+              <rect x="17.5" y="14" width="2.5" height="2.5" rx="0.3" fill="#C4B5FD"/>
+              <rect x="14" y="17.5" width="2.5" height="2.5" rx="0.3" fill="#C4B5FD"/>
+              <rect x="17.5" y="17.5" width="2.5" height="2.5" rx="0.3" fill="#C4B5FD"/>
+            </svg>
+          </div>
+          <p class="placeholder-text">Your QR code will appear here</p>
+        </div>
+
+        <!-- Loading spinner -->
+        <div class="qr-loading" id="qr-loading">
+          <div class="spinner"></div>
+          <p>Generating…</p>
+        </div>
+
+        <!-- Generated QR -->
+        <div class="qr-output" id="qr-output"></div>
+      </div>
+
+      <!-- Download button -->
+      <button class="btn btn-download" id="download-btn" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download PNG
+      </button>
+    </section>
+
+  </div>
+
+  <script src="qrcode.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
